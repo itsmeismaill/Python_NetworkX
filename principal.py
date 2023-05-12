@@ -4,11 +4,19 @@ import networkx as nx
 import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 from algorithmes import *
-# Initialiser la variable canvas à None
-canvas = None
+def passer_algo():
+    
+    nv_fenetre = tk.Tk()
+    nv_fenetre.title("Mon Application")
+    nv_fenetre.geometry("400x300")  # Set the width to 400 pixels and height to 300 pixels
 
-
-
+    radiobutton1 = tk.Radiobutton(nv_fenetre, text="BFS",command=bfs,  value="algorithm1")
+    radiobutton2 = tk.Radiobutton(nv_fenetre, text="DFS",command=dfs,  value="algorithm2")
+    radiobutton3 = tk.Radiobutton(nv_fenetre, text="KRUSKAL & PRIME",command=kruskal,value="algorithm3")
+    radiobutton1.pack()
+    radiobutton2.pack()
+    radiobutton3.pack()
+    nv_fenetre.mainloop()
 def charger_graphe():
     global canvas  # Ajouter la déclaration pour utiliser la variable globale canvas
     # Récupérer le contenu du champ de texte
@@ -29,7 +37,7 @@ def charger_graphe():
         canvas.get_tk_widget().destroy()
 
     # Dessiner le graphe dans le canvas
-    fig = plt.figure()
+    fig = plt.figure(figsize=(4, 4))
     canvas = FigureCanvasTkAgg(fig, master=fenetre)
     canvas.draw()
     canvas.get_tk_widget().pack()
@@ -58,7 +66,7 @@ def charger_graphe2():
         canvas.get_tk_widget().destroy()
 
     # Dessiner le graphe dans le canvas
-    fig = plt.figure()
+    fig = plt.figure(figsize=(4, 4))
     canvas = FigureCanvasTkAgg(fig, master=fenetre)
     canvas.draw()
     canvas.get_tk_widget().pack()
@@ -66,34 +74,28 @@ def charger_graphe2():
     # Dessiner le graphe
     nx.draw(G, with_labels=True, node_size=500, node_color="blue", ax=fig.gca())
 def charger_graphe3():
-    global canvas  # Ajouter la déclaration pour utiliser la variable globale canvas
-    # Récupérer le contenu du champ de texte
+    global canvas
+    
     contenu = champ_texte.get("1.0", tk.END)
 
-    # Écrire le contenu dans un fichier texte temporaire
     with open("temp.txt", "w") as fichier:
         fichier.write(contenu)
 
-    # Charger le graphe à partir du fichier temporaire
-    G =  nx.read_edgelist("temp.txt",data=[('weight',int)],create_using=nx.DiGraph())
-    pos=nx.spring_layout(G)
+    G = nx.read_edgelist("temp.txt", data=[('weight', int)], create_using=nx.DiGraph())
+    pos = nx.spring_layout(G)
 
-    # Effacer le contenu du champ de texte
-    # champ_texte.delete("1.0", tk.END)
-
-    # Effacer le contenu du canvas s'il existe
     if canvas:
         canvas.get_tk_widget().destroy()
 
-    # Dessiner le graphe dans le canvas
-    fig = plt.figure()
+    fig = plt.figure(figsize=(4, 4))
     canvas = FigureCanvasTkAgg(fig, master=fenetre)
     canvas.draw()
     canvas.get_tk_widget().pack()
 
-    # Dessiner le graphe
-    nx.draw(G,pos,with_labels=True,node_size=500,node_color="blue")
-    nx.draw_networkx_edge_labels(G,pos,font_size=10, edge_labels=nx.get_edge_attributes(G,'weight'))
+        # Dessiner le graphe avec les poids
+    nx.draw(G, pos, with_labels=True, node_size=500, node_color="blue")
+    nx.draw_networkx_edge_labels(G, pos, font_size=10, edge_labels=nx.get_edge_attributes(G, 'weight'))
+
     
 def charger_graphe4():
     global canvas  # Ajouter la déclaration pour utiliser la variable globale canvas
@@ -116,34 +118,14 @@ def charger_graphe4():
         canvas.get_tk_widget().destroy()
 
     # Dessiner le graphe dans le canvas
-    fig = plt.figure()
+    fig = plt.figure(figsize=(4, 4))
     canvas = FigureCanvasTkAgg(fig, master=fenetre)
     canvas.draw()
     canvas.get_tk_widget().pack()
-
     # Dessiner le graphe
     nx.draw(G,pos,with_labels=True,node_size=500,node_color="blue")
     nx.draw_networkx_edge_labels(G,pos,font_size=10, edge_labels=nx.get_edge_attributes(G,'weight'))
-
-
-
-def passer_algo():
     
-    nv_fenetre = tk.Tk()
-    nv_fenetre.title("Mon Application")
-    nv_fenetre.geometry("400x300")  # Set the width to 400 pixels and height to 300 pixels
-
-    radiobutton1 = tk.Radiobutton(nv_fenetre, text="BFS",command=bfs,  value="algorithm1")
-    radiobutton2 = tk.Radiobutton(nv_fenetre, text="DFS",command=dfs,  value="algorithm2")
-    radiobutton3 = tk.Radiobutton(nv_fenetre, text="DIJEKSTRA",  value="algorithm3")
-    radiobutton1.pack()
-    radiobutton2.pack()
-    radiobutton3.pack()
-    nv_fenetre.mainloop()
-    
-    
-
-
 
 # Créer la fenêtre Tkinter
 fenetre = tk.Tk()
@@ -185,13 +167,12 @@ bouton_passer_algo = tk.Button( fenetre, text="Choisir algorithme" , command=pas
 bouton_passer_algo.pack(pady=2)
 # Créer le canvas
 
-# Créer le canvas pour afficher le graphe
-fig = plt.figure(figsize=(8, 10))  # Définir la taille du graphe (8 pouces de largeur, 6 pouces de hauteur)
+# # Créer le canvas pour afficher le graphe
+fig = plt.figure(figsize=(4, 4))  # Définir la taille du graphe (8 pouces de largeur, 6 pouces de hauteur)
 canvas = FigureCanvasTkAgg(fig, master=fenetre)
 canvas.draw()
-canvas.get_tk_widget().pack(fill=tk.BOTH, expand=True)  # Remplir le canvas dans les deux directions
+canvas.get_tk_widget().pack() 
 
 
 # Lancer la boucle d'événements Tkinter
 fenetre.mainloop()
-
