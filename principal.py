@@ -13,9 +13,11 @@ def passer_algo():
     radiobutton1 = tk.Radiobutton(nv_fenetre, text="BFS",command=bfs,  value="algorithm1")
     radiobutton2 = tk.Radiobutton(nv_fenetre, text="DFS",command=dfs,  value="algorithm2")
     radiobutton3 = tk.Radiobutton(nv_fenetre, text="KRUSKAL & PRIME",command=kruskal,value="algorithm3")
+    radiobutton4 = tk.Radiobutton(nv_fenetre, text="DIJEKSTRA",command=dijkstra,value="algorithm4")
     radiobutton1.pack()
     radiobutton2.pack()
     radiobutton3.pack()
+    radiobutton4.pack()
     nv_fenetre.mainloop()
 def charger_graphe():
     global canvas  # Ajouter la déclaration pour utiliser la variable globale canvas
