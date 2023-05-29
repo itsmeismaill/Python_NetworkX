@@ -31,7 +31,7 @@ def passer_algo():
     def votre_algo():
         nv_fenetre1.destroy()
         nv_fenetre = tk.Tk()
-        nv_fenetre.title("Mon Application")
+        nv_fenetre.title("choisir un algorithme")
         nv_fenetre.geometry("400x300")  # Set the width to 400 pixels and height to 300 pixels
         if(num.get()==1):
             radiobutton1 = tk.Radiobutton(nv_fenetre, text="BFS",command=bfs, background = "light blue")
@@ -50,36 +50,38 @@ def passer_algo():
         elif(num.get()==3):
             radiobutton1p = tk.Radiobutton(nv_fenetre, text="BFS",command=bfsP, background = "light blue")
             radiobutton2p = tk.Radiobutton(nv_fenetre, text="DFS",command=dfsP,background = "light blue")
-            radiobutton4 = tk.Radiobutton(nv_fenetre, text="DIJKSTRA",background = "light blue")
+            radiobutton4 = tk.Radiobutton(nv_fenetre, text="DIJKSTRA",command=Dijkstra,background = "light blue")
             radiobutton5 = tk.Radiobutton(nv_fenetre, text="WARSHALL",command=warshallPO,background = "light blue")
-            radiobutton6 = tk.Radiobutton(nv_fenetre, text="BELLMAN-FORD" ,command=run_bellman_ford,background = "light blue")
-            radiobutton7 = tk.Radiobutton(nv_fenetre, text="FORD-FORKENSON",background = "light blue")
+            radiobutton6 = tk.Radiobutton(nv_fenetre, text="Bellman-Ford" ,command=bellman_ford,background = "light blue")
+            
             radiobutton1p.pack(pady=8)
             radiobutton2p.pack(pady=8)
             radiobutton4.pack(pady=8)
             radiobutton5.pack(pady=8)
             radiobutton6.pack(pady=8)
-            radiobutton7.pack(pady=8)
+           
         elif(num.get()==4):   
             radiobutton1p = tk.Radiobutton(nv_fenetre, text="BFS",command=bfsP, background = "light blue")
             radiobutton2p = tk.Radiobutton(nv_fenetre, text="DFS",command=dfsP,background = "light blue")
             radiobutton3 = tk.Radiobutton(nv_fenetre, text="KRUSKAL & PRIME",command=kruskal,background = "light blue")
-            radiobutton4 = tk.Radiobutton(nv_fenetre, text="DIJKSTRA",background = "light blue")
+            radiobutton4 = tk.Radiobutton(nv_fenetre, text="DIJKSTRA",command=Dijkstra2,background = "light blue")
             radiobutton5 = tk.Radiobutton(nv_fenetre, text="WARSHALL",command=warshallPNO,background = "light blue")
-            radiobutton7 = tk.Radiobutton(nv_fenetre, text="FORD-FORKENSON",background = "light blue")
+            radiobutton6 = tk.Radiobutton(nv_fenetre, text="Bellman-Ford" ,command=bellman_ford2,background = "light blue")
+            
             radiobutton1p.pack(pady=8)
             radiobutton2p.pack(pady=8)
             radiobutton3.pack(pady=8)
             radiobutton4.pack(pady=8)
             radiobutton5.pack(pady=8)
+            radiobutton6.pack(pady=8)
             
-            radiobutton7.pack(pady=8)
+            
         nv_fenetre.mainloop()
     
      
     global nv_fenetre1 
     nv_fenetre1 = tk.Tk()
-    nv_fenetre1.title("Choisir votre algorithme")
+    nv_fenetre1.title("Choisir votre type de graph")
     nv_fenetre1.geometry("400x300")  # Set the width to 400 pixels and height to 300 pixels
 
     label = tk.Label(nv_fenetre1, text="Type de graph:",font=("Arial", 20),background = "gold")
@@ -183,7 +185,7 @@ def charger_graphe3():
     canvas.get_tk_widget().place(x=400,y=100)
 
         # Dessiner le graphe avec les poids
-    nx.draw(G, pos, with_labels=True, node_size=500, node_color="blue")
+    nx.draw(G, pos, with_labels=True, node_size=300, node_color="blue")
     nx.draw_networkx_edge_labels(G, pos, font_size=10, edge_labels=nx.get_edge_attributes(G, 'weight'))
     poids_total = sum(nx.get_edge_attributes(G, 'weight').values())
     info_label = tk.Label(fenetre, text=f"Informations du graphe : \n Nombre de nœuds = {G.number_of_nodes()} \n Nombre d'arêtes = {G.number_of_edges()} \n Poids total = {poids_total}",fg="blue") 
@@ -217,7 +219,7 @@ def charger_graphe4():
     canvas.draw()
     canvas.get_tk_widget().place(x=400,y=100)
     # Dessiner le graphe
-    nx.draw(G,pos,with_labels=True,node_size=500,node_color="blue")
+    nx.draw(G,pos,with_labels=True,node_size=300,node_color="blue")
     nx.draw_networkx_edge_labels(G,pos,font_size=10, edge_labels=nx.get_edge_attributes(G,'weight'))
     poids_total = sum(nx.get_edge_attributes(G, 'weight').values())
     info_label = tk.Label(fenetre, text=f"Informations du graphe : \n Nombre de nœuds = {G.number_of_nodes()} \n Nombre d'arêtes = {G.number_of_edges()} \n Poids total = {poids_total}",fg="blue") 
@@ -226,7 +228,7 @@ def charger_graphe4():
 
 # Créer la fenêtre Tkinter
 fenetre = tk.Tk()
-fenetre.title("Mon Application")  # Ajouter un titre à la fenêtre
+fenetre.title("EasyGraph")  # Ajouter un titre à la fenêtre
 load = Image.open("C:/Users/pc/Desktop/th/tik+net/Projet_th_graphes/asset/image.png")
 photo = ImageTk.PhotoImage(load) 
 label = tk.Label(image=photo, bg ="#F0FFF0")

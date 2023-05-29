@@ -6,15 +6,7 @@ import matplotlib.pyplot as plt
 from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
 import matplotlib.backends.backend_tkagg as tkagg
 from tkinter import ttk
-import collections
-import tkinter as tk
-import matplotlib.pyplot as plt
-from matplotlib.backends.backend_tkagg import FigureCanvasTkAgg
-import networkx as nx
-import networkx as nx
-import collections
-import tkinter as tk
-from tkinter import ttk
+
 def warshallO():
     # Read the list from the temp.txt file
     with open("temp.txt", "r") as fichier:
